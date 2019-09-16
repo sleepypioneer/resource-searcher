@@ -23,6 +23,15 @@ To run the program use the command:
 pipenv run python main.py
 ```
 
+### 🐋 Run in Docker
+
+You can run the scraper in a Docker container by running the following command in the root directory:
+
+```sh
+docker-compose up --build
+```
+*The `--build` tag is required only on the first run and when changes have been made.*
+
 ## ✔️ Tests
 
 All tests can be run with:

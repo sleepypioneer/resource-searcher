@@ -1,0 +1,6 @@
+version: "3"
+
+services:
+  resourcescraper:
+    build: ./scraper
+    image: sleepypioneer/resourcescraper:latest
