@@ -5,5 +5,5 @@ RUN pip install -r requirements.txt
 COPY . /scraper
 WORKDIR /src/resource-searcher/scraper
 
-CMD python /scraper/main.py
+CMD URL='https://realpython.com/python-web-scraping-practical-introduction/' python /scraper/main.py
 
