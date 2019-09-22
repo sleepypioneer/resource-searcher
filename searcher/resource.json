@@ -1,0 +1,49 @@
+{
+    "meta" : {
+        "url": "https://realpython.com/python-web-scraping-practical-introduction/",
+    },
+    "document": {
+        "title": "Practical Introduction to Web Scraping in Python",
+        "content": """
+        <p>What is web scraping all about?</p>
+        <p>Imagine that one day, out of the blue, you find yourself thinking 'Gee, I wonder who the five most popular mathematicians are?” </p>
+        <p>You do a bit of thinking, and you get the idea to use <a href='https://www.mediawiki.org/wiki/XTools'>Wikipedia’s XTools</a> to measure the popularity of a mathematician by equating popularity with pageviews. For example, look at the <a href='https://xtools.wmflabs.org/articleinfo/en.wikipedia.org/Henri_Poincar%C3%A9'>page on Henri Poincaré</a>. There, you can see that Poincaré’s pageviews for the last 60 days are, as of December 2017, around 32,000. </p>
+        <p>Next, you Google “famous mathematicians” and find <a href='http://www.fabpedigree.com/james/mathmen.htm'>this resource</a> that lists 100 names. Now you have a page listing mathematicians’ names as well as a website that provides information about how “popular” that mathematician is. Now what?</p>
+        <p>This is where Python and web scraping come in. Web scraping is about downloading structured data from the web, selecting some of that data, and passing along what you selected to another process. </p>
+        <p>In this tutorial, you will be writing a Python program that downloads the list of 100 mathematicians and their XTools pages, selects data about their popularity, and finishes by telling us the top 5 most popular mathematicians of all time! Let’s get started.
+        Your first task will be to download web pages. The <code>requests</code> package comes to the rescue. It aims to be an easy-to-use tool for doing all things HTTP in Python, and it doesn’t dissappoint. In this tutorial, you will need only the <code>requests.get()</code> function, but you should definitely checkout the <a href='http://docs.python-requests.org/en/master/'>full documentation</a> when you want to go further. </p>
+        First, here’s your function:
+        Attempts to get the content at `url` by making an HTTP GET request.</span>
+        If the content-type of response is some kind of HTML/XML, return the</span>
+        text content, otherwise return None.</span>
+        <p>If the above HTML is saved in the file <code>contrived.html</code>, then you can use <code>BeautifulSoup</code> like this:
+        <p>Breaking down the example, you first parse the raw HTML by passing it to the <code>BeautifulSoup</code> constructor. <code>BeautifulSoup</code> accepts multiple back-end parsers, but the standard back-end is <code>'html.parser'</code>, which you supply here as the second argument. (If you neglect to supply that <code>'html.parser'</code>, then the code will still work, but you will see a warning print to your screen.)</p>
+        <h2 id='putting-it-all-together'>Putting It All Together</h2>
+        <p>You have reached a point where you can finally find out which mathematician is most beloved by the public! The plan is simple: </p>
+        <ul>
+        <li>Get a list of names </li>
+        <li>Iterate over the list to get a “popularity score” for each name</li>
+        <li>Finish by sorting the names by popularity </li>
+        </ul>
+        <p>Simple, right? Well, there’s one thing that hasn’t been mentioned yet: errors.</p>
+        <p>Working with real-world data is messy, and trying to force messy data into a uniform shape will invariably result in the occasional error jumping in to mess with your nice clean vision of how things ought to be. Ideally, you would like to keep track of errors when they occur in order to get a better sense of the of quality your data.</p>
+        <p>For your present purposes, you will track instances in which you could not find a popularity score for a given mathematician’s name. At the end of the script, you will print a message showing the number of mathematicians who were left out of the rankings. </p>
+        Here’s the code:
+        That’s it!
+        <p>When you run the script, you should see at the following report:</p>
+        The most popular mathematicians are:
+        <span class='go'>But we did not find results for 19 mathematicians on our list</span>
+        </pre></div>
+        <div class='w-100 text-center js-needs-scaling' style='transform-origin: 0 0;'><div id='waldo-tag-5000'></div> <a class='small text-muted js-disclosure' href='/account/join/' rel='nofollow' style='display: none;'> <i aria-hidden='true' class='fa fa-info-circle'> </i> Remove ads</a></div><h2 id='conclusion-next-steps'>Conclusion &amp; Next Steps</h2>
+        <p>Web scraping is a big field, and you have just finished a brief tour of that field, using Python as you guide. You can get pretty far using just <code>requests</code> and <code>BeautifulSoup</code>, but as you followed along, you may have come up with few questions:</p>
+        <ul>
+        <li>What happens if page content loads as a result of asynchronous JavaScript requests? (Check out <a href='http://seleniumhq.github.io/selenium/docs/api/py/'>Selenium’s Python API</a>.)</li>
+        <li>How do I write a web spider or search engine bot that traverses large portions of the web?</li>
+        <li>What is this <a href='https://realpython.com/web-scraping-and-crawling-with-scrapy-and-mongodb/'>Scrapy</a> thing I keep hearing about?</li>
+        </ul>
+        <p>These are topics for another post… Keep your eyes peeled! There will be a followup that uses Selenium and a headless browser to deal with dynamic content:</p>
+        <div class='alert alert-warning' role='alert'><p><strong>Don't miss the follow up tutorial:</strong> <a href='https://realpython.com/optins/view/newsletter-dont-miss-updates-experiment/' class='alert-link' data-toggle='modal' data-target='#modal-newsletter-dont-miss-updates-experiment' data-focus='false'>Click here to join the Real Python Newsletter</a> and you'll know when the next installment comes out.</p></div>
+        Until then, happy scraping!
+        """,
+    },
+}
