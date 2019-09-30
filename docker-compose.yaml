@@ -4,3 +4,5 @@ services:
   resourcescraper:
     build: ./scraper
     image: sleepypioneer/resourcescraper:latest
+    ports:
+      - "8001:8001"
