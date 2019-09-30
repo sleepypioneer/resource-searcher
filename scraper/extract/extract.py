@@ -16,7 +16,7 @@ def get_article_content(html_string):
     article_body = html_string.find("div", class_="article-body")
     article_content = set()
     for p in html_string.select('p'):
-        article_content.add(p)
+        article_content.add(str(p.text.strip()))
     return article_content
 
 def extract_article(raw_content):
@@ -27,5 +27,4 @@ def extract_article(raw_content):
 
     title = get_article_title(html)
     content = get_article_content(html)
-
-    return title, len(content)
+    return title, content
