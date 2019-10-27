@@ -26,8 +26,8 @@ func init() {
 }
 
 func Test_Analyse(t *testing.T) {
-	expectedWordCount := 5833
-	expectedTopics := []string{"python", "list", "Django"}
+	expectedWordCount := 5841
+	expectedTopics := []string{"python", "Django", "list"}
 	err := mockArticle.Document.Analyse()
 
 	assert.NoError(t, err)
