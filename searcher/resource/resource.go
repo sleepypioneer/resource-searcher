@@ -2,6 +2,7 @@ package resource
 
 import (
 	"log"
+	"strings"
 
 	"github.com/sleepypioneer/resource-searcher/searcher/analyse"
 )
@@ -24,16 +25,39 @@ type Meta struct {
 type Document struct {
 	Title     string   `json:"title"`
 	Content   []string `json:"content"`
+	Words     []string
 	WordCount int
 	Topics    []string
 }
 
+var punctuation = []string{".", ",", "!", ":", ";", "'", "/", "-", "_", "*", "&", "{", "}", "[", "]", "(", ")"}
+
 // Analyse runs the various analysing logic on the give document
 func (doc *Document) Analyse() error {
-	// do something with your document
-	doc.WordCount = analyse.WordCount(doc.Content)
-	doc.Topics = analyse.FindTopics(doc.Content)
+	err := doc.ProcessWords()
+	if err != nil {
+		return err
+	}
+	doc.WordCount = len(doc.Words)
+	doc.Topics = analyse.FindTopics(doc.Words)
 	log.Printf("doc word count: %d", doc.WordCount)
 	log.Printf("doc topics: %v", doc.Topics)
+	return nil
+}
+
+// ProcessWords returns total number of words in the article
+func (doc *Document) ProcessWords() error {
+	var wordsComplete []string
+	// for each paragraph in the article we count how many words it contains.
+	for _, p := range doc.Content {
+		// remove all punction in paragraph
+		for _, punc := range punctuation {
+			p = strings.ReplaceAll(p, punc, "")
+		}
+		// split paragraph into words list
+		words := strings.Fields(p)
+		wordsComplete = append(wordsComplete, words...)
+	}
+	doc.Words = wordsComplete
 	return nil
 }

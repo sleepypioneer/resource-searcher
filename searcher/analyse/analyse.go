@@ -1,14 +1,22 @@
 package analyse
 
-import (
-	"strings"
-)
-
 var (
 	// keywords    = map[string]struct{}{"python": struct{}{}, "webservice": struct{}{}, "server": struct{}{}, "Django": struct{}{}, "list": struct{}{}}
-	keywords    = []string{"python", "webservice", "server", "Django", "list"}
-	punctuation = []string{".", ",", "!", ":", ";", "'", "/", "-", "_", "*", "&", "{", "}", "[", "]"}
+	keywords = []string{"python", "webservice", "server", "Django", "list"}
 )
+
+// taken from https://www.golangprograms.com/remove-duplicate-values-from-slice.html
+func unique(stringSlice []string) []string {
+	keys := make(map[string]bool)
+	list := []string{}
+	for _, entry := range stringSlice {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
+}
 
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
@@ -19,32 +27,12 @@ func stringInSlice(a string, list []string) bool {
 	return false
 }
 
-// WordCount returns total number of words in the article
-func WordCount(content []string) int {
-	wordCount := 0
-	// for each paragraph in the article we count how many words it contains.
-	for _, p := range content {
-		// remove all punction in paragraph
-		for _, punc := range punctuation {
-			p = strings.ReplaceAll(p, punc, "")
-		}
-		// split paragraph into words list
-		words := strings.Fields(p)
-		wordCount += len(words)
-	}
-	// return total word count for the article
-	return wordCount
-}
-
 // FindTopics retuns a list of topics which the article includes
-func FindTopics(content []string) (topics []string) {
-	var words []string
-	for _, p := range content {
-		words = append(words, strings.Fields(p)...)
-	}
+func FindTopics(words []string) (topics []string) {
+	uniqueWords := unique(words)
 
-	mb := make(map[string]struct{}, len(words))
-	for _, x := range words {
+	mb := make(map[string]struct{}, len(uniqueWords))
+	for _, x := range uniqueWords {
 		mb[x] = struct{}{}
 	}
 
