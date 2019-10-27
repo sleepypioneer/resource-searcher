@@ -25,4 +25,13 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v ./...
+      run: go build -v ./scraper
+
+  gofmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.12.7'
+      - run: diff -u <(echo -n) <(gofmt -d ./)
