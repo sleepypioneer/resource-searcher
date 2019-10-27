@@ -1,10 +1,7 @@
 package analyse
 
 import (
-	"log"
 	"strings"
-
-	"github.com/sleepypioneer/resource-searcher/searcher/resource"
 )
 
 var (
@@ -48,14 +45,4 @@ func FindTopics(content []string) (topics []string) {
 		}
 	}
 	return topics
-}
-
-// Analyse runs the various analysing logic on the give document
-func Analyse(doc *resource.Document) {
-	// do something with your document
-	doc.WordCount = WordCount(doc.Content)
-	doc.Topics = FindTopics(doc.Content)
-	log.Printf("doc word count: %d", doc.WordCount)
-	log.Printf("doc topics: %v", doc.Topics)
-
 }

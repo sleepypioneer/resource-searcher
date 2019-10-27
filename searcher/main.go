@@ -7,7 +7,6 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/sleepypioneer/resource-searcher/searcher/analyse"
 	"github.com/sleepypioneer/resource-searcher/searcher/resource"
 )
 
@@ -50,7 +49,10 @@ func main() {
 		}
 
 		// do we need an error to be returned?
-		analyse.Analyse(scrapedResource.Document)
+		err = scrapedResource.Document.Analyse()
+		if err != nil {
+			log.Printf("ERROR: %v", err)
+		}
 
 		if err := s.store(scrapedResource); err != nil {
 			log.Printf("ERROR: %v", err)
