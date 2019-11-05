@@ -25,7 +25,7 @@ type Meta struct {
 type Document struct {
 	Title     string   `json:"title"`
 	Content   []string `json:"content"`
-	Words     []string
+	Words     map[string]int
 	WordCount int
 	Topics    []string
 }
@@ -38,7 +38,6 @@ func (doc *Document) Analyse() error {
 	if err != nil {
 		return err
 	}
-	doc.WordCount = len(doc.Words)
 	doc.Topics = analyse.FindTopics(doc.Words)
 	log.Printf("doc word count: %d", doc.WordCount)
 	log.Printf("doc topics: %v", doc.Topics)
@@ -47,8 +46,9 @@ func (doc *Document) Analyse() error {
 
 // ProcessWords returns total number of words in the article
 func (doc *Document) ProcessWords() error {
-	var wordsComplete []string
 	// for each paragraph in the article we count how many words it contains.
+	wordsComplete := make(map[string]int)
+
 	for _, p := range doc.Content {
 		// remove all punction in paragraph
 		for _, punc := range punctuation {
@@ -56,8 +56,13 @@ func (doc *Document) ProcessWords() error {
 		}
 		// split paragraph into words list
 		words := strings.Fields(p)
-		wordsComplete = append(wordsComplete, words...)
+		doc.WordCount += len(words)
+		// wordsComplete = append(wordsComplete, words...)
+		for _, word := range words {
+			wordsComplete[word]++
+		}
 	}
+
 	doc.Words = wordsComplete
 	return nil
 }
