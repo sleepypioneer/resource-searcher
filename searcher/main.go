@@ -10,6 +10,12 @@ import (
 	"github.com/sleepypioneer/resource-searcher/searcher/resource"
 )
 
+// Scraper scrapes resources and stores them in the DB
+type Scraper interface {
+	Scrape(string) (*resource.Resource, error)
+	store(res *resource.Resource) error
+}
+
 type service struct {
 	// db *sql.DB
 }
