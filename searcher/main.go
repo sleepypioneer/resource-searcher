@@ -10,6 +10,10 @@ import (
 	"github.com/sleepypioneer/resource-searcher/searcher/resource"
 )
 
+type service struct {
+	// db *sql.DB
+}
+
 func (s *service) scrape(url string) (*resource.Resource, error) {
 	// read file for the moment
 	// in the future: call the python scraper
@@ -23,10 +27,6 @@ func (s *service) scrape(url string) (*resource.Resource, error) {
 		return nil, errors.Wrap(err, "unmarshalling JSON")
 	}
 	return res, nil
-}
-
-type service struct {
-	// db *sql.DB
 }
 
 func (s *service) store(res *resource.Resource) error {

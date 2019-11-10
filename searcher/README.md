@@ -22,5 +22,11 @@ go run main.go
 All tests can be run with the following command inside the `/searcher` directory:
 
 ```sh
-go run ./... -cover -race
+go test ./... -cover -race
+```
+
+or to see benchmarks:
+
+```
+go test ./... -bench=.
 ```
