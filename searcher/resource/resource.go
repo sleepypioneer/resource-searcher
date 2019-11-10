@@ -11,6 +11,7 @@ var (
 	punctuation = []string{".", ",", "!", ":", ";", "'", "/", "-", "_", "*", "&", "{", "}", "[", "]"}
 )
 
+// Resource stores the document and meta information for scraped data
 type Resource struct {
 	Document *Document `json:"document"`
 	Meta     *Meta     `json:"meta"`
@@ -21,11 +22,13 @@ type Resource struct {
 // 	document []byte `json:"document"`
 // }
 
+// Meta Data for scraped data
 type Meta struct {
 	HTTPStatus int    `json:"http_status"`
 	URL        string `json:"url"`
 }
 
+// Document stores scraped data for document
 type Document struct {
 	Title     string   `json:"title"`
 	Content   []string `json:"content"`
