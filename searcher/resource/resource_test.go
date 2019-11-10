@@ -29,7 +29,7 @@ func init() {
 }
 
 func Test_Analyse(t *testing.T) {
-	expectedWordCount := 5838
+	expectedWordCount := 5841
 	expectedTopics := []string{"python", "Django", "list"}
 	err := mockArticle.Document.Analyse()
 
@@ -38,25 +38,19 @@ func Test_Analyse(t *testing.T) {
 	assert.Equal(t, expectedTopics, mockArticle.Document.Topics)
 }
 
-func Test_WordCount(t *testing.T) {
-	expectedWordCount := 5841
-	content := mockArticle.Document.Content
-
-	assert.Equal(t, expectedWordCount, WordCount(content))
-}
-
 func Test_FindTopics(t *testing.T) {
 	expectedTopics := []string{"python", "Django", "list"}
-	content := mockArticle.Document.Content
-	assert.Equal(t, expectedTopics, FindTopics(content))
+	words := mockArticle.Document.Words
+
+	assert.Equal(t, expectedTopics, FindTopics(words))
 }
 
 func Benchmark_FindTopics(b *testing.B) {
 	var topics []string
-	content := mockArticle.Document.Content
+	words := mockArticle.Document.Words
 	// run the FindTopics function b.N times
 	for n := 0; n < b.N; n++ {
-		topics = FindTopics(content)
+		topics = FindTopics(words)
 	}
 
 	// always store the result to a package level variable
