@@ -17,10 +17,10 @@ Pipenv
 
 You'll need [pipenv](https://pipenv.readthedocs.io/en/latest/) installed.
 
-To run the program use the command inside the `/scraper` directory and add the URL of the article you want to scape at the start of the command:
+To run the program inside the `/scraper` directory run the following command:
 
 ```sh
- URL='https://realpython.com/python-web-scraping-practical-introduction/' pipenv run python main.py
+pipenv run python main.py
 ```
 
 ### 🐋 Run in Docker
