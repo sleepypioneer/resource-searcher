@@ -12,13 +12,11 @@ jobs:
           go-version: '1.13'
       - run: go test ./... -cover -race
 
-  
-
-  # gofmt:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - uses: actions/setup-go@v1
-  #       with:
-  #         go-version: '1.13'
-  #     - run: cd searcher && diff -u <(echo -n) <(gofmt -d ./)
+  gofmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.13'
+      - run: diff -u <(echo -n) <(gofmt -d .)
