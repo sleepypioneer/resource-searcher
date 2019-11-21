@@ -22,7 +22,10 @@ jobs:
       run: |
         cd scraper/
         pip install black
-        black . --diff 
+        # Runs Black linter on all files,
+        # if changes are necessary it returns 
+        # what requires changing
+        black ./ --check --diff
     - name: Test with pytest
       run: |
         cd scraper/
