@@ -3,11 +3,13 @@ package resource
 import (
 	"log"
 	"strings"
+
+	"github.com/bbalet/stopwords"
 )
 
 var (
 	// keywords    = map[string]struct{}{"python": struct{}{}, "webservice": struct{}{}, "server": struct{}{}, "Django": struct{}{}, "list": struct{}{}}
-	keywords    = []string{"python", "webservice", "server", "Django", "list"}
+	keywords    = []string{"python", "webservice", "server", "django", "list"}
 	punctuation = []string{".", ",", "!", ":", ";", "'", "/", "-", "_", "*", "&", "{", "}", "[", "]"}
 )
 
@@ -55,6 +57,8 @@ func (doc *Document) ProcessWords() error {
 	wordsComplete := make(map[string]int)
 
 	for _, p := range doc.Content {
+		// remove all stop words and numbers
+		p = stopwords.CleanString(p, "en", true)
 		// remove all punction in paragraph
 		for _, punc := range punctuation {
 			p = strings.ReplaceAll(p, punc, "")
