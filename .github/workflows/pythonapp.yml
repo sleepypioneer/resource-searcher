@@ -1,0 +1,33 @@
+name: Python application
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        cd scraper
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Lint with black
+      run: |
+        cd scraper/
+        pip install black
+        # Runs Black linter on all files,
+        # if changes are necessary it returns 
+        # what requires changing
+        black ./ --check --diff
+    - name: Test with pytest
+      run: |
+        cd scraper/
+        pip install pytest
+        python -m pytest tests/

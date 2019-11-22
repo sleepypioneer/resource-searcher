@@ -17,7 +17,7 @@ Pipenv
 
 You'll need [pipenv](https://pipenv.readthedocs.io/en/latest/) installed.
 
-To run the program use the command:
+To run the program inside the `/scraper` directory run the following command:
 
 ```sh
 pipenv run python main.py
@@ -34,8 +34,8 @@ docker-compose up --build
 
 ## ✔️ Tests
 
-All tests can be run with:
+All tests can be run with the following command inside the `/scraper` directory:
 
 ```sh
-pipenv python -m pytest tests/
+pipenv run python -m pytest tests/
 ```
