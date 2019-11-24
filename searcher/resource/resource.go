@@ -57,7 +57,7 @@ func (doc *Document) ProcessWords() error {
 	wordsComplete := make(map[string]int)
 
 	for _, p := range doc.Content {
-		// remove all stop words and numbers
+		// remove all stop words and numbers (also puts to lower case)
 		p = stopwords.CleanString(p, "en", true)
 		// remove all punction in paragraph
 		for _, punc := range punctuation {
