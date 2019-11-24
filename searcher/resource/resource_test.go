@@ -29,8 +29,8 @@ func init() {
 }
 
 func Test_Analyse(t *testing.T) {
-	expectedWordCount := 2949
-	expectedTopics := []string{"python", "django", "list"}
+	expectedWordCount := 5841
+	expectedTopics := []string{"python", "Django", "list"}
 	err := mockArticle.Document.Analyse()
 
 	assert.NoError(t, err)
@@ -39,7 +39,7 @@ func Test_Analyse(t *testing.T) {
 }
 
 func Test_FindTopics(t *testing.T) {
-	expectedTopics := []string{"python", "django", "list"}
+	expectedTopics := []string{"python", "Django", "list"}
 	words := mockArticle.Document.Words
 
 	assert.Equal(t, expectedTopics, FindTopics(words))
